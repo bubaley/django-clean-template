@@ -45,11 +45,8 @@ fi
 random_str=`sudo head /dev/urandom | tr -dc "A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_{|}~" | fold -w 50 | head -n 1`
 env_path="$project_path/src/core/settings/.env"
 echo "SECRET_KEY=$random_str" >> $env_path
-echo "ALLOWED_HOST=$project_domain"
+echo "ALLOWED_HOST=$project_domain" >> $env_path
 
-sudo systemctl daemon-reload
-sudo systemctl start gu-$basedir
-sudo systemctl enable gu-$basedir
 sudo service nginx restart
 
 setup_ssl=""
@@ -64,3 +61,8 @@ sudo apt-get update
 sudo apt-get install certbot python-certbot-nginx
 sudo certbot --nginx
 fi
+
+sudo systemctl daemon-reload
+sudo systemctl start gu-$basedir
+sudo systemctl enable gu-$basedir
+
