@@ -54,12 +54,18 @@ setup_ssl=""
 read -p "Do you want to install ssl? (y/n): " setup_ssl
 if [ "$setup_ssl" = "y"  ]
 then
+I=`dpkg -s certbot | grep "Status" `
+if [ -n "$I" ]
+then
+echo "sertbot already installed"
+else
 sudo apt-get update
 sudo apt-get install software-properties-common
 sudo add-apt-repository universe
 sudo add-apt-repository ppa:certbot/certbot
 sudo apt-get update
 sudo apt-get install certbot python-certbot-nginx
+fi
 sudo certbot --nginx
 fi
 
