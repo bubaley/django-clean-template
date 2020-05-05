@@ -46,6 +46,7 @@ random_str=`sudo head /dev/urandom | tr -dc "A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_{
 env_path="$project_path/src/core/settings/.env"
 echo "SECRET_KEY=$random_str" >> $env_path
 echo "ALLOWED_HOST=$project_domain" >> $env_path
+echo "DEBUG=False" >> $env_path
 
 sudo service nginx restart
 
