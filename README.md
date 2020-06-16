@@ -17,7 +17,7 @@
 ```bash
 su - postgres
 createdb --encoding UNICODE __database_name__ --username postgres
-exit
+sudo -u postgres psql
 grant all privileges on database __database_name__ to dbuser;
 \c __database_name__
 GRANT ALL ON ALL TABLES IN SCHEMA public to dbuser;
@@ -27,7 +27,6 @@ CREATE EXTENSION pg_trgm;
 ALTER EXTENSION pg_trgm SET SCHEMA public;
 UPDATE pg_opclass SET opcdefault = true WHERE opcname='gin_trgm_ops';
 \q
-exit
 ```
 Необходимо добавить в `src/core/settings/.env` доступ к созданной базе данных 
 
